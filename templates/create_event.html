@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Event - Dogfood Portal</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 32px;
+            border-radius: 14px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .hint {
+            display: block;
+            margin-top: 6px;
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        .date-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #4f46e5;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #4338ca;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px auto;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .date-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>Create Hackathon Event</h1>
+
+        <p class="subtitle">
+            Configure your event details, schedule, tracks and prizes.
+        </p>
+
+        <form method="POST">
+
+            <div class="form-group">
+                <label for="name">Event Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="e.g. Dogfood Demo Hackathon"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea
+                    id="description"
+                    name="description"
+                    placeholder="Describe the hackathon..."
+                ></textarea>
+            </div>
+
+            <div class="date-row">
+
+                <div class="form-group">
+                    <label for="starts_at">Event Starts</label>
+                    <input
+                        type="datetime-local"
+                        id="starts_at"
+                        name="starts_at"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="submissions_close">Submission Deadline</label>
+                    <input
+                        type="datetime-local"
+                        id="submissions_close"
+                        name="submissions_close"
+                        required
+                    >
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label for="tracks">Tracks</label>
+
+                <textarea
+                    id="tracks"
+                    name="tracks"
+                    placeholder="Example:
+AI & Machine Learning
+Web Development
+Social Impact"
+                ></textarea>
+
+                <span class="hint">
+                    Enter one track per line.
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label for="prizes">Prizes</label>
+
+                <textarea
+                    id="prizes"
+                    name="prizes"
+                    placeholder="Example:
+Winner - ₹50,000
+Runner-up - ₹25,000
+Best Innovation - ₹10,000"
+                ></textarea>
+
+                <span class="hint">
+                    Enter one prize per line.
+                </span>
+            </div>
+
+            <button type="submit">
+                Create Event
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

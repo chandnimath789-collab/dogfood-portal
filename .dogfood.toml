@@ -1,0 +1,19 @@
+[portal]
+base_url = "http://127.0.0.1:5000"
+
+[tiers]
+claimed = ["T1", "T2"]
+pitch = "A self-hostable hackathon submission and judging portal with role-based access, team workflows, project submission, and judge scoring."
+
+[auth]
+organizer   = "X-Dogfood-Role: organizer"
+judge_a     = "X-Dogfood-Role: judge_a"
+judge_b     = "X-Dogfood-Role: judge_b"
+participant = "X-Dogfood-Role: participant"
+
+[routes]
+gallery      = "/projects"
+submit       = "/submit-project"
+judge_scores = "/api/judge/scores"
+peer_scores  = "/api/judge/scores?judge=judge_a"
+csv_export   = "/api/export.csv"

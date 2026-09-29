@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Teams - Dogfood Portal</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        .team-card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .event {
+            color: #6b7280;
+            margin-bottom: 18px;
+        }
+
+        .invite-box {
+            background: #f3f4f6;
+            padding: 14px;
+            border-radius: 8px;
+            margin: 15px 0;
+            word-break: break-all;
+        }
+
+        .member {
+            padding: 12px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .member:last-child {
+            border-bottom: none;
+        }
+
+        .member-name {
+            font-weight: bold;
+        }
+
+        .member-email {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .role {
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .empty {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>My Teams</h1>
+
+    {% if teams %}
+
+        {% for team in teams %}
+
+            <div class="team-card">
+
+                <h2>{{ team[1] }}</h2>
+
+                <p class="event">
+                    Event: <strong>{{ team[3] }}</strong>
+                </p>
+
+                <div class="invite-box">
+                    <strong>Invite Link:</strong><br>
+                    http://127.0.0.1:5000/join-team/{{ team[2] }}
+                </div>
+
+                <h3>Members</h3>
+
+                {% for member in all_members[team[0]] %}
+
+                    <div class="member">
+
+                        <div class="member-name">
+                            {{ member[0] }}
+                        </div>
+
+                        <div class="member-email">
+                            {{ member[1] }}
+                        </div>
+
+                        <div class="role">
+                            Role: {{ member[2] }}
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty">
+            You are not part of any team yet.
+        </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

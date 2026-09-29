@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Project Submission - Dogfood Portal</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+        }
+
+        textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        button {
+            flex: 1;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .draft {
+            background: #6b7280;
+            color: white;
+        }
+
+        .draft:hover {
+            background: #4b5563;
+        }
+
+        .final {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .final:hover {
+            background: #4338ca;
+        }
+
+        .empty {
+            padding: 15px;
+            border-radius: 8px;
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+
+        .hint {
+            display: block;
+            margin-top: 6px;
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 15px auto;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>Project Submission</h1>
+
+        <p class="subtitle">
+            Save your project as a draft or submit it for final judging.
+        </p>
+
+        {% if teams %}
+
+        <form method="POST">
+
+            <div class="form-group">
+
+                <label for="team_id">Your Team</label>
+
+                <select id="team_id" name="team_id" required>
+
+                    <option value="" disabled selected>
+                        Select your team
+                    </option>
+
+                    {% for team in teams %}
+
+                    <option value="{{ team[0] }}">
+                        {{ team[1] }} — {{ team[3] }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="name">Project Name</label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="e.g. SkillInterestPath"
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="description">Project Description</label>
+
+                <textarea
+                    id="description"
+                    name="description"
+                    placeholder="Explain what your project does..."
+                ></textarea>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="github_url">GitHub Repository</label>
+
+                <input
+                    type="url"
+                    id="github_url"
+                    name="github_url"
+                    placeholder="https://github.com/username/project"
+                >
+
+                <span class="hint">
+                    Make sure your repository is public.
+                </span>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="demo_url">Live Demo</label>
+
+                <input
+                    type="url"
+                    id="demo_url"
+                    name="demo_url"
+                    placeholder="https://username.github.io/project/"
+                >
+
+            </div>
+
+            <div class="buttons">
+
+                <button
+                    type="submit"
+                    name="action"
+                    value="draft"
+                    class="draft"
+                >
+                    Save Draft
+                </button>
+
+                <button
+                    type="submit"
+                    name="action"
+                    value="final"
+                    class="final"
+                >
+                    Final Submit
+                </button>
+
+            </div>
+
+        </form>
+
+        {% else %}
+
+        <div class="empty">
+            You are not currently part of any team.
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

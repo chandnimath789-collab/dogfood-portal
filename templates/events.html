@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hackathon Events</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .event-card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .event-card h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .info {
+            margin: 10px 0;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        .section {
+            margin-top: 20px;
+        }
+
+        .section h3 {
+            margin-bottom: 8px;
+        }
+
+        .section ul {
+            padding-left: 20px;
+        }
+
+        .status {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        .empty {
+            text-align: center;
+            color: #6b7280;
+            padding: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Hackathon Events</h1>
+
+    {% if events %}
+
+        {% for event in events %}
+
+            <div class="event-card">
+
+                <h2>{{ event[1] }}</h2>
+
+                <p class="description">
+                    {{ event[2] }}
+                </p>
+
+                <p class="info">
+                    <span class="label">Event Starts:</span>
+                    {{ event[3] }}
+                </p>
+
+                <p class="info">
+                    <span class="label">Submission Deadline:</span>
+                    {{ event[4] }}
+                </p>
+
+                <div class="section">
+
+                    <h3>Tracks</h3>
+
+                    {% if event[5] %}
+                        <ul>
+                            {% for track in event[5].split('\n') %}
+                                <li>{{ track }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No tracks specified.</p>
+                    {% endif %}
+
+                </div>
+
+                <div class="section">
+
+                    <h3>Prizes</h3>
+
+                    {% if event[6] %}
+                        <ul>
+                            {% for prize in event[6].split('\n') %}
+                                <li>{{ prize }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No prizes specified.</p>
+                    {% endif %}
+
+                </div>
+
+                <span class="status">
+                    {{ event[7] }}
+                </span>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty">
+            No hackathon events available.
+        </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

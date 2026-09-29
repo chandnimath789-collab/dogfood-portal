@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .number {
+            font-size: 32px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .label {
+            color: #6b7280;
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Admin Dashboard</h1>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="label">Total Events</div>
+            <div class="number">{{ event_count }}</div>
+        </div>
+
+        <div class="card">
+            <div class="label">Total Teams</div>
+            <div class="number">{{ team_count }}</div>
+        </div>
+
+        <div class="card">
+            <div class="label">Total Projects</div>
+            <div class="number">{{ project_count }}</div>
+        </div>
+
+        <div class="card">
+            <div class="label">Submitted Projects</div>
+            <div class="number">{{ submitted_count }}</div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

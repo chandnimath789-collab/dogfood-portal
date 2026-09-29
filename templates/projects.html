@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Project Gallery - Dogfood Portal</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            background: white;
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-form input {
+            flex: 1;
+            padding: 12px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .search-form button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #4f46e5;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .search-form button:hover {
+            background: #4338ca;
+        }
+
+        .clear-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: #4f46e5;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .project-card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 22px;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .project-card h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .team {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .links {
+            margin-top: 18px;
+        }
+
+        .links a {
+            display: inline-block;
+            margin-right: 15px;
+            margin-bottom: 8px;
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        .empty {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 14px;
+            color: #6b7280;
+        }
+
+        @media (max-width: 600px) {
+            .search-form {
+                flex-direction: column;
+            }
+
+            .search-form button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Hackathon Project Gallery</h1>
+
+    <div class="search-box">
+
+        <form method="GET" action="/projects" class="search-form">
+
+            <input
+                type="text"
+                name="q"
+                value="{{ search }}"
+                placeholder="Search by project name or team name..."
+            >
+
+            <button type="submit">
+                Search
+            </button>
+
+        </form>
+
+        {% if search %}
+            <a href="/projects" class="clear-link">
+                Clear Search
+            </a>
+        {% endif %}
+
+    </div>
+
+    {% if projects %}
+
+        {% for project in projects %}
+
+            <div class="project-card">
+
+                <h2>{{ project[1] }}</h2>
+
+                <p class="description">
+                    {{ project[2] }}
+                </p>
+
+                <p class="team">
+                    Team: {{ project[5] }}
+                </p>
+
+                <div class="links">
+
+                    {% if project[3] %}
+                        <a href="{{ project[3] }}" target="_blank">
+                            GitHub Repository
+                        </a>
+                    {% endif %}
+
+                    {% if project[4] %}
+                        <a href="{{ project[4] }}" target="_blank">
+                            Live Demo
+                        </a>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty">
+            {% if search %}
+                No submitted projects found for "{{ search }}".
+            {% else %}
+                No submitted projects available.
+            {% endif %}
+        </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

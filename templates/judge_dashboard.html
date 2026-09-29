@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Judge Dashboard - Dogfood Portal</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .project-card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 22px;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        .description {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .team {
+            font-weight: bold;
+        }
+
+        a {
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .empty {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Judge Dashboard</h1>
+
+    {% if assignments %}
+
+        {% for assignment in assignments %}
+
+            <div class="project-card">
+
+                <h2>{{ assignment[2] }}</h2>
+
+                <p class="description">
+                    {{ assignment[3] }}
+                </p>
+
+                <p class="team">
+                    Team: {{ assignment[6] }}
+                </p>
+                <p>
+    <strong>Scoring Progress:</strong>
+    {{ assignment[7] }} / 3 criteria scored
+</p>
+
+<p>
+    <strong>Weighted Score:</strong>
+    {{ "%.2f"|format(assignment[8]) }} / 5
+</p>
+
+<p>
+    <strong>Percentage:</strong>
+    {{ "%.1f"|format((assignment[8] / 5) * 100) }}%
+</p>
+
+                <p>
+                    {% if assignment[4] %}
+                        <a href="{{ assignment[4] }}" target="_blank">
+                            GitHub Repository
+                        </a>
+                    {% endif %}
+
+                    {% if assignment[5] %}
+                        <a href="{{ assignment[5] }}" target="_blank">
+                            Live Demo
+                        </a>
+                    {% endif %}
+                </p>
+                <p>
+    <a href="/judge/score/{{ assignment[0] }}">
+        Score This Project
+    </a>
+</p>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty">
+            No projects assigned to you.
+        </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
